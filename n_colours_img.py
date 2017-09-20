@@ -11,3 +11,4 @@ def n_colours_img(path, colours):
     :param path: path to the image, colours: array with colours
     :return: should return or just plot resulting image.
     '''
+

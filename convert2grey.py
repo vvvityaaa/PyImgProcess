@@ -18,3 +18,8 @@ def convert2grey(path, weight_red, weight_green, weight_blue):
     array = np.asarray(i, dtype=np.float32)
     i_grau = weight_red * array[:, :, 0] + weight_green * array[:, :, 1] + weight_blue * array[:, :, 2]
     return i_grau
+
+if __name__ == "__main__":
+    grey_img = convert2grey('lena.jpg', 0.2125, 0.7154, 0.072)
+    plt.imshow(grey_img, cmap='gray', interpolation='nearest')
+    plt.show()
