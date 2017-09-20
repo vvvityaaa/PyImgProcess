@@ -18,6 +18,7 @@ def n_colours_img(path, colours):
     :param path: path to the image, colours: array with colours
     :return: should return or just plot resulting image.
     '''
+
     i = Image.open(path)
     if(check_if_grey(i) == True):
         max_Value = np.max(i)
