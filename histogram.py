@@ -10,3 +10,17 @@ def histogram(path):
     :param path:
     :return:
     '''
+    i = Image.open(path)
+    array = np.asarray(i, dtype=int)
+    histogram_list = np.zeros(255, dtype=int)
+    for row in array:
+        for element in row:
+            histogram_list[element] += 1
+    return histogram_list
+
+
+if __name__ == "__main__":
+    histogr = histogram('lena.png')
+    plt.bar(np.arange(255),histogr)
+    plt.ylabel("Grauwertanzahl")
+    plt.show()
