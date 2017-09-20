@@ -14,6 +14,6 @@ def convert2grey(weight_red, weight_green, weight_blue):
     '''
 
     i = Image.open('lena.jpg')
-    array = np.asarray(I, dtype=np.float32)
+    array = np.asarray(i, dtype=np.float32)
     i_grau = weight_red * array[:, :, 0] + weight_green * array[:, :, 1] + weight_blue * array[:, :, 2]
     return i_grau
