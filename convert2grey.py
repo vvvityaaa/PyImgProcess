@@ -19,7 +19,7 @@ def convert2grey(path, weight_red, weight_green, weight_blue):
         i_grau = weight_red * array[:, :, 0] + weight_green * array[:, :, 1] + weight_blue * array[:, :, 2]
         return i_grau
     except TypeError:
-        return "The params seems not to be rigth"
+        return "Parameters seem not to be right"
     except OSError:
         return "This isn't an image"
 

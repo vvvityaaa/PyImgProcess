@@ -34,7 +34,9 @@ def n_colours_img(path, colours):
     else:
         print("The picture should be grey")
 
-changed = n_colours_img("C:\\Users\\Artur\\Pictures\\lena.png", [100, 200, 345])
-print(changed)
-#plt.imshow(changed, cmap='Greys', interpolation='nearest')
-#plt.show()
+
+if __name__ == "__main__":
+    changed = n_colours_img("lena.png", [100, 200, 345])
+    print(changed)
+    #plt.imshow(changed, cmap='Greys', interpolation='nearest')
+    # #plt.show()
