@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import math
 
 
 def kuwahara_filter(path, mask_size):
@@ -10,81 +11,39 @@ def kuwahara_filter(path, mask_size):
     :param path:
     :param mask_size: should be odd number, at least 3
     :return: filtered image
-
-    SAMPLE CODE IN MATLAB
-    function result = KuwaharaFilter(image,maskSize)
-%Kuwahara Filter:
-%Teile Umgebung in 4 Regionen
-%Auswahl der Region mit geringster Varianz
-%Mittelwert dieser Region wird in den jeweiligen Pixel gespeichert
-
-[sizeX, sizeY] = size(image);
-halfSize = floor(maskSize/2);
-
-for i = (1+halfSize):(sizeX-halfSize)
-    for j = (1+halfSize):(sizeY-halfSize)
-        %Arrays von 4 Regionen zu dem Pixel(i,j)
-        top_left = image(i-halfSize:i,j-halfSize:j);
-        top_right = image(i-halfSize:i,j:j+halfSize);
-        bottom_left = image(i:i+halfSize,j-halfSize:j);
-        bottom_right = image(i:i+halfSize,j:j+halfSize);
-        %Mittelwerte der 4 Regionen
-        avg_tl = sum(sum(top_left))/numel(top_left);
-        avg_tr = sum(sum(top_right))/numel(top_right);
-        avg_bl = sum(sum(bottom_left))/numel(bottom_left);
-        avg_br = sum(sum(bottom_right))/numel(bottom_right);
-
-        %Berechnung der Varianz der vier Regionen
-        var_tl = 0;
-        var_tr = 0;
-        var_bl = 0;
-        var_br = 0;
-        for m = i-halfSize:i
-            for k = j-halfSize:j
-                var_tl = var_tl+(double(image(m,k))-avg_tl)^2;
-            end
-        end
-        var_tl=var_tl/numel(top_left);
-
-        for m = i-halfSize:i
-            for k = j:j+halfSize
-                var_tr = var_tr+(double(image(m,k))-avg_tr)^2;
-            end
-        end
-        var_tr=var_tr/numel(top_right);
-
-        for m = i:i+halfSize
-            for k = j-halfSize:j
-                var_bl = var_bl+(double(image(m,k))-avg_bl)^2;
-            end
-        end
-        var_bl=var_bl/numel(bottom_left);
-
-        for m = i:i+halfSize
-            for k = j:j+halfSize
-                var_br = var_br+(double(image(m,k))-avg_br)^2;
-            end
-        end
-        var_br=var_br/numel(bottom_right);
-
-        %Auswahl der Region mit der geringsten Varianz und
-        %Zuweisung des Mittelwertes dieser Region dem Pixel
-        m = min([var_tr,var_tl,var_br,var_bl])
-        if m==var_tr
-            image(i,j)=avg_tr;
-        elseif m==var_tl
-            image(i,j)=avg_tl;
-        elseif m==var_br
-            image(i,j)=avg_br;
-        elseif m==var_bl
-            image(i,j)=avg_bl;
-        end
-
-    end
-end
-result=image;
-end
     '''
+    i = Image.open(path)
+    image_array = np.asarray(i, dtype=int)
+    image_height, image_width = i.size
+    half_size = math.floor(mask_size/2)
 
+    for i in range(half_size, image_height-half_size):
+
+        for j in range(half_size, image_width-half_size):
+            #region extraction
+            top_left = (image_array[i-half_size:i+1, j-half_size:j+1]).ravel() # extracts every region from array
+            top_right = (image_array[i-half_size:i+1, j:j+half_size+1]).ravel() # and converts it into 1D array
+            bottom_left = (image_array[i:i+half_size+1, j-half_size:j+1]).ravel()
+            bottom_right = (image_array[i:i+half_size+1, j:j+half_size+1]).ravel()
+            #variance calculation
+            tl_var = top_left.var()
+            tr_var = top_right.var()
+            bl_var = bottom_left.var()
+            br_var = bottom_right.var()
+            # calculates the min of variances of all regions
+            m = np.amin([tl_var, tr_var, bl_var, br_var])
+            # finds out which region has the lowest variance, current pixel gets than the mean of that region
+            if m == tl_var:
+                image_array[i,j] = np.mean(top_left)
+            elif m == tr_var:
+                image_array[i, j] = np.mean(top_right)
+            elif m == bl_var:
+                image_array[i, j] = np.mean(bottom_left)
+            elif m == br_var:
+                image_array[i, j] = np.mean(bottom_right)
+    return image_array
 
 if __name__ == "__main__":
+    kuwahara_img = kuwahara_filter('lena.png', 5)
+    plt.imshow(kuwahara_img, cmap='gray', interpolation='nearest')
+    plt.show()
