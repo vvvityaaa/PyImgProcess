@@ -21,6 +21,7 @@ def n_colours_img(path, colours):
     '''
 
     image_2_change = Image.open(path)
+
     array = np.asanyarray(image_2_change, dtype=np.float32)
     if check_if_image_grey(image_2_change):
         max_value = np.max(array)
