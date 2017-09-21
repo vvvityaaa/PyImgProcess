@@ -13,13 +13,20 @@ def convert2grey(path, weight_red, weight_green, weight_blue):
     :param weight_blue: weight of Blue colour, for tv-signals equals to 0.114
     :return: returns the grey_value_image or plots it
     '''
-
-    i = Image.open(path)
-    array = np.asarray(i, dtype=np.float32)
-    i_grau = weight_red * array[:, :, 0] + weight_green * array[:, :, 1] + weight_blue * array[:, :, 2]
-    return i_grau
+    try:
+        i = Image.open(path)
+        array = np.asarray(i, dtype=np.float32)
+        i_grau = weight_red * array[:, :, 0] + weight_green * array[:, :, 1] + weight_blue * array[:, :, 2]
+        return i_grau
+    except TypeError:
+        return "The params seems not to be rigth"
+    except OSError:
+        return "This isn't an image"
 
 if __name__ == "__main__":
     grey_img = convert2grey('lena.jpg', 0.2125, 0.7154, 0.072)
-    plt.imshow(grey_img, cmap='gray', interpolation='nearest')
-    plt.show()
+    if type(grey_img) != str:
+        plt.imshow(grey_img, cmap='gray', interpolation='nearest')
+        plt.show()
+    else:
+        print(grey_img)
