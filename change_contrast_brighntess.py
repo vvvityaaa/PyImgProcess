@@ -18,15 +18,15 @@ def change_contrast_brighness(path, contrast=1, brightness=0):
     for i in range(len(image_array)):
         for j in range(len(image_array[i])):
             value = contrast*image_array[i, j] + brightness
-            if value<0:
+            if value < 0:
                 image_array[i, j] = 0
-            elif value>255:
+            elif value > 255:
                 image_array[i, j] = 255
             else:
                 image_array[i, j] = contrast*image_array[i, j] + brightness
     return image_array
 
 if __name__ == "__main__":
-    contrasted_img = change_contrast_brighness('lena.png', 2, 0)
+    contrasted_img = change_contrast_brighness('lena.png', -1, 255)
     plt.imshow(contrasted_img, cmap='gray', interpolation='nearest')
     plt.show()

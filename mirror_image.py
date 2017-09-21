@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def mirror_image(path, parameter='b'):
 
     '''
-    Function mirrors image to vertical or horizontal axis.
+    Function mirrors image to vertical or horizontal axis or both of them.
     :param path: if parameter == v - image will be mirrored against vertical axis
     if parameter == h - image will be mirrored against horizontal axis
     if parameter == b - image will be mirrored against both axis

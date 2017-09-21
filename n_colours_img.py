@@ -10,6 +10,11 @@ return: should return a boolean; True means it is a grey picture and false means
 
 
 def check_if_image_grey(image_2_check):
+    '''
+    Function should check wether the picture ist grey oder coloured
+    param image_2_check: image that should be checked
+    return: should return a boolean; True means it is a grey picture and false means it is a coloured pictures
+    '''
     return np.ndim(image_2_check)  # If the picture is grey, than the third dimension should have the length 1
 
 
