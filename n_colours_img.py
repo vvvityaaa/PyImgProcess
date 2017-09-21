@@ -21,15 +21,20 @@ def n_colours_img(path, colours):
     '''
 
     image_2_change = Image.open(path)
+
+    array = np.asanyarray(image_2_change, dtype=np.float32)
     if check_if_image_grey(image_2_change):
-        max_value = np.max(image_2_change)
-        min_value = np.min(image_2_change)
+        max_value = np.max(array)
+        min_value = np.min(array)
         step_count = len(colours)
         step_width = (max_value - min_value) / step_count
-        for step in range(max_value, min_value, step_count):
-            changed_image = [step for pixel in image_2_change if ((pixel - step) < step_width) & ((pixel - step) > 0)]
-            return changed_image
+        for step in np.arange(max_value, min_value, step_count):
+            changed_image = [step for pixel in array if ((pixel - step) < step_width) & ((pixel - step) > 0)]
+        return changed_image
     else:
         print("The picture should be grey")
+
 changed = n_colours_img("C:\\Users\\Artur\\Pictures\\lena.png", [100, 200, 345])
 print(changed)
+#plt.imshow(changed, cmap='Greys', interpolation='nearest')
+#plt.show()
