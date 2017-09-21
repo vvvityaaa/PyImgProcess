@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def kuwahara_filter(path, mask_size):
 
     '''
-    Applies kuwahara filter on the given image
+    Applies kuwahara filter on the given image (Folien 4 Seite 44)
     :param path:
     :param mask_size: should be odd number, at least 3
     :return: filtered image
