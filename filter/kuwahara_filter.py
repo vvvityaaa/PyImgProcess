@@ -2,6 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import math
+import time
 
 
 def kuwahara_filter(path, mask_size):
@@ -52,6 +53,9 @@ def kuwahara_filter(path, mask_size):
     return resulting_img
 
 if __name__ == "__main__":
+    algorithm_laufzeit = time.time()
     kuwahara_img = kuwahara_filter('lena.png', 5)
+    algorithm_laufzeit = time.time()-algorithm_laufzeit
+    print(algorithm_laufzeit)
     plt.imshow(kuwahara_img, cmap='gray', interpolation='nearest')
     plt.show()

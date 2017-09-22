@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+
 def min_filter(path, region_size):
     '''
         Values for every pixel equals to the min of all values in the region
@@ -29,6 +30,6 @@ def min_filter(path, region_size):
 
 
 if __name__ == "__main__":
-    median_img = min_filter('lena.png', 3)
+    median_img = min_filter('lena_noise.png', 3)
     plt.imshow(median_img, cmap='gray', interpolation='nearest')
     plt.show()

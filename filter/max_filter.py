@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+
 def max_filter(path, region_size):
     '''
         Values for every pixel equals to the max of all values in the region
@@ -29,6 +30,6 @@ def max_filter(path, region_size):
 
 
 if __name__ == "__main__":
-    max_img = max_filter('lena.png', 3)
+    max_img = max_filter('lena_noise.png', 3)
     plt.imshow(max_img, cmap='gray', interpolation='nearest')
     plt.show()

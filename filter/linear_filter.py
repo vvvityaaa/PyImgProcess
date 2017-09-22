@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 import math
-
+import time
 
 def linear_filter(path, mask):
 
@@ -47,7 +47,10 @@ def linear_filter(path, mask):
 
 
 if __name__ == "__main__":
+    algorithm_laufzeit = time.time()
     result_img = linear_filter('lena.png', np.arange(49).reshape(7, 7))
+    algorithm_laufzeit = time.time() - algorithm_laufzeit
+    print(algorithm_laufzeit)
     if type(result_img) != str:
         plt.imshow(result_img, cmap='gray', interpolation='nearest')
         plt.show()
