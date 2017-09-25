@@ -8,4 +8,4 @@ Remember: This library is only compatible with python3. You need to have it inst
 - run the command "python3 setup.py build" or "python setup.py build" depending on which installation of python is installed
 - after that run the command "python3 setup.py install"
 
-Then the library is ready to use.
+Then the library is ready to be used.
