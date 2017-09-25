@@ -10,7 +10,7 @@ def kuwahara_filter(path, mask_size):
 
     '''
     Applies kuwahara filter on the given image
-    :param path:
+    :param path: path to the image
     :param mask_size: should be odd number, at least 3
     :return: filtered image
     '''
@@ -18,7 +18,7 @@ def kuwahara_filter(path, mask_size):
     # variable initialization
     i = Image.open(path)
     image_array = np.asarray(i, dtype=int)
-    image_height, image_width = i.size
+    image_height, image_width = image_array.shape
     half_size = math.floor(mask_size/2)
     resulting_img = np.zeros(image_height * image_width).reshape(image_height, image_width)
 

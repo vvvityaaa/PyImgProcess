@@ -3,14 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def change_contrast_brighness(path, contrast=1, brightness=0):
+def change_contrast_brightness(path, contrast=1, brightness=0):
 
     '''
-    Changes contrast of the given image with parameters contrast and brightness. Formula contrast*image[i,j]+brightness
-    :param path:
-    :param contrast:
-    :param brightness:
-    :return:
+    Changes contrast and brightness of the given image with parameters contrast and brightness.
+    Formula contrast*image[i,j]+brightness
+
+    :param path: path to the image
+    :param contrast: contrast of the new image, default 1
+    :param brightness: brightness of the new image, default 0
+    :return: new image
     '''
 
     i = Image.open(path)
@@ -27,6 +29,6 @@ def change_contrast_brighness(path, contrast=1, brightness=0):
     return image_array
 
 if __name__ == "__main__":
-    contrasted_img = change_contrast_brighness('lena.png', -1, 255)
+    contrasted_img = change_contrast_brightness('lena.png', -1, 255)
     plt.imshow(contrasted_img, cmap='gray', interpolation='nearest')
     plt.show()

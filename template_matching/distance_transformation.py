@@ -5,9 +5,12 @@ import time
 
 
 def distance_transformation(path):
+
     """
-    :param path:
-    :return:
+    Distance transformation of the binary image based on Manhattan Distance (city block distance)
+
+    :param path: path to the image
+    :return: distance transformation array of the image
     SAMPLE MATLAB CODE
     """
     try:

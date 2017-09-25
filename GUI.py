@@ -50,7 +50,7 @@ def choose_simple(option):
             # convert with the right function
             return
         contrast = img_process_gui.numberBox("Contrast", "Set the contrast modifier")
-        brightness = img_process_gui.numberBox("Brightness", "Sett the brightness modifier")
+        brightness = img_process_gui.numberBox("Brightness", "Set the brightness modifier")
         # showed_image = call the function then updateImg()
     elif option == "convert to binary":
         # showed_image = call the function then updateImg()
@@ -140,8 +140,8 @@ def choose_template(option):
 
 
 # create a GUI variable
-img_process_gui = gui("Image Processing", "600x400")
-img_process_gui.setBg("blue")
+img_process_gui = gui("Image Processing", "1280x1080")
+img_process_gui.setBg("#c2c6c3")
 img_process_gui.setFont(17)
 
 # add Menu list
