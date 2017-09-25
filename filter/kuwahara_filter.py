@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 import time
+import exmod
 
 
 def kuwahara_filter(path, mask_size):
@@ -32,10 +33,16 @@ def kuwahara_filter(path, mask_size):
             bottom_right = (image_array[i:i+half_size+1, j:j+half_size+1]).ravel()
 
             # variance calculation
-            tl_var = top_left.var()
-            tr_var = top_right.var()
-            bl_var = bottom_left.var()
-            br_var = bottom_right.var()
+            #tl_var = top_left.var()
+            #tr_var = top_right.var()
+            #bl_var = bottom_left.var()
+            #br_var = bottom_right.var()
+
+            # variance is calculated in C-extension module exmod
+            tl_var = exmod.var(list(top_left))
+            tr_var = exmod.var(list(top_right))
+            bl_var = exmod.var(list(bottom_left))
+            br_var = exmod.var(list(bottom_right))
 
             # calculates the min of variances of all regions
             m = np.amin([tl_var, tr_var, bl_var, br_var])
@@ -49,12 +56,11 @@ def kuwahara_filter(path, mask_size):
                 resulting_img[i, j] = np.mean(bottom_left)
             elif m == br_var:
                 resulting_img[i, j] = np.mean(bottom_right)
-
     return resulting_img
 
 if __name__ == "__main__":
     algorithm_laufzeit = time.time()
-    kuwahara_img = kuwahara_filter('lena.png', 5)
+    kuwahara_img = kuwahara_filter('lena.png', 15)
     algorithm_laufzeit = time.time()-algorithm_laufzeit
     print(algorithm_laufzeit)
     plt.imshow(kuwahara_img, cmap='gray', interpolation='nearest')

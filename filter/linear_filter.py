@@ -4,10 +4,11 @@ import matplotlib.pyplot as plt
 import math
 import time
 
+
 def linear_filter(path, mask):
 
     '''
-    Filters the image on the given path with linear filter mask. (Folien 3 Seite 46 und Folien 4 Seite 27)
+    Filters the image on the given path with linear filter mask.
     :param path:
     :param mask:
     :return: filtered image
