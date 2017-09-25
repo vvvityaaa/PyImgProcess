@@ -1,0 +1,3 @@
+/Users/MACBOOK/PycharmProjects/PyImgProcess/filter/C_extension/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/MACBOOK/PycharmProjects/PyImgProcess/filter/C_extension/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/MACBOOK/PycharmProjects/PyImgProcess/filter/C_extension/cmake-build-debug/CMakeFiles/variancemodule.dir
