@@ -71,8 +71,8 @@ def choose_simple(option):
             # convert with the right function
             return
         mirror_param = img_process_gui.textBox("Mirror Parameter", "Set the mirror parameter")
-        while not np.any(mirror_param == ["v", "h", "b"]):
-            region_size = img_process_gui.numberBox("Mirror Parameter", "The parameter must be v, h or b")
+        while not (mirror_param == "v" or mirror_param == "h" or mirror_param == "b"):
+            region_size = img_process_gui.textBox("Mirror Parameter", "The parameter must be v, h or b")
         # showed_image = call the function then updateImg()
         return
 
@@ -84,7 +84,7 @@ def choose_filter(option):
             # convert with the right function
             return
         mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size")
-        while mask_size < 3 & mask_size%2 == 0:
+        while mask_size < 3 or mask_size % 2 == 0:
             mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size. It has to be odd and at least 3")
         # showed_image = call the function then updateImg()
         return
@@ -94,7 +94,7 @@ def choose_filter(option):
             # convert with the right function
             return
         mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size")
-        while mask_size < 3 & mask_size % 2 == 0:
+        while mask_size < 3 or mask_size % 2 == 0:
             mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size. It has to be odd and at least 3")
         # showed_image = call the function then updateImg()
         return
@@ -104,7 +104,7 @@ def choose_filter(option):
             # convert with the right function
             return
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
-        while region_size < 3 & region_size % 2 == 0:
+        while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")
         # showed_image = call the function then updateImg()
         return
@@ -114,7 +114,7 @@ def choose_filter(option):
             # convert with the right function
             return
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
-        while region_size < 3 & region_size % 2 == 0:
+        while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")
         # showed_image = call the function then updateImg()
         return
@@ -124,7 +124,7 @@ def choose_filter(option):
             # convert with the right function
             return
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
-        while region_size < 3 & region_size % 2 == 0:
+        while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")
         # showed_image = call the function then updateImg()
         return
