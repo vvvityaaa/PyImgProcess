@@ -75,10 +75,9 @@ def choose_simple(option):
     # TODO: comment
     global showed_image
     if option == "change contrast/brightness":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         contrast = img_process_gui.numberBox("Contrast", "Set the contrast modifier")
         brightness = img_process_gui.numberBox("Brightness", "Set the brightness modifier")
         temp = Image.fromarray(np.uint8(ed_img.change_contrast_brightness(contrast, brightness)))
@@ -100,10 +99,9 @@ def choose_simple(option):
         temp.save(showed_image)
         update_image()
     elif option == "mirror image":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         mirror_param = img_process_gui.textBox("Mirror Parameter", "Set the mirror parameter")
         while not (mirror_param == "v" or mirror_param == "h" or mirror_param == "b"):
             mirror_param = img_process_gui.textBox("Mirror Parameter", "The parameter must be v, h or b")
@@ -118,10 +116,9 @@ def choose_filter(option):
     global showed_image
     # TODO: comment
     if option == "kuwahara":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size")
         while mask_size < 3 or mask_size % 2 == 0:
             mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size. It has to be odd and at least 3")
@@ -131,10 +128,9 @@ def choose_filter(option):
         temp.save(showed_image)
         update_image()
     elif option == "linear filter":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size")
         while mask_size < 3 or mask_size % 2 == 0:
             mask_size = img_process_gui.numberBox("Mask Size", "Set the mask size. It has to be odd and at least 3")
@@ -143,10 +139,9 @@ def choose_filter(option):
         temp.save(showed_image)
         update_image()
     elif option == "min filter":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
         while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")
@@ -155,10 +150,9 @@ def choose_filter(option):
         temp.save(showed_image)
         update_image()
     elif option == "median filter":
-        grey = True  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
         while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")
@@ -167,10 +161,9 @@ def choose_filter(option):
         temp.save(showed_image)
         update_image()
     elif option == "max filter":
-        grey = ed_img.check_if_image_grey()  # This value has to be set with the right function
+        grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
         if not grey:
-            # convert with the right function
-            return
+            print("Image should be grey")
         region_size = img_process_gui.numberBox("Region Size", "Set the region size")
         while region_size < 3 or region_size % 2 == 0:
             region_size = img_process_gui.numberBox("Region Size", "Set the region size. It has to be odd & at least 3")

@@ -21,6 +21,11 @@ from template_matching.correlation_coefficient import correlation_coefficient
 
 class ImageEdit(object):
 
+    '''
+    Class for image editing, which takes path as argument during initialization.
+    Then you can apply different methods on that class object.
+    '''
+
     def __init__(self, path):
         self.path = path
 
