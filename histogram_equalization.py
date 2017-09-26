@@ -14,7 +14,7 @@ def histogram_equalization(path):
     :return:
     '''
     i = Image.open(path)
-    image_height, image_width = i.size
+    image_height, image_width = i.shape
     size = image_height*image_width
     hist = histogram(path)
     quantity_of_grey_values = len(hist)
