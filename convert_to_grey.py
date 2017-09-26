@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def convert2grey(path, weight_red, weight_green, weight_blue):
+def convert_to_grey(path, weight_red=0.299, weight_green=0.587, weight_blue=0.114):
 
     '''
     Function converts RGB-image to grey_value_image and depends on red, green and blue weight values
@@ -24,7 +24,7 @@ def convert2grey(path, weight_red, weight_green, weight_blue):
         return "This isn't an image"
 
 if __name__ == "__main__":
-    grey_img = convert2grey('lena.jpg', 0.2125, 0.7154, 0.072)
+    grey_img = convert_to_grey('lena.jpg', 0.2125, 0.7154, 0.072)
     if type(grey_img) != str:
         plt.imshow(grey_img, cmap='gray', interpolation='nearest')
         plt.show()

@@ -1,5 +1,5 @@
 from PIL import Image
-from distance_transformation import distance_transformation
+from template_matching.distance_transformation import distance_transformation
 import numpy as np
 import matplotlib.pyplot as plt
 import time

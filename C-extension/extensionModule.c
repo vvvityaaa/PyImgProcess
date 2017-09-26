@@ -1,6 +1,5 @@
 #include </usr/local/Cellar/python3/3.5.1/Frameworks/Python.framework/Versions/3.5/include/python3.5m/Python.h>
 
-//TODO: median
 
 static PyObject* exmod_median(PyObject *self, PyObject * args){
 
@@ -49,7 +48,6 @@ static PyObject* exmod_median(PyObject *self, PyObject * args){
 
 }
 
-//TODO: mean
 
 static PyObject* exmod_mean(PyObject *self, PyObject * args){
 
