@@ -1,9 +1,11 @@
-from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-from histogram import histogram
-from cumulative_histogram import cumulative_histogram
 from math import floor
+
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
+from img_statistics.histogram import histogram
+
+from img_statistics.cumulative_histogram import cumulative_histogram
 
 
 def histogram_equalization(path):

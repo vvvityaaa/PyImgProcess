@@ -1,22 +1,25 @@
-from change_contrast_brightness import change_contrast_brightness
-from check_if_image_grey import check_if_image_grey
-from color_proportion import color_proportion
-from convert_to_binary import convert_to_binary
-from convert_to_grey import convert_to_grey
-from cumulative_histogram import cumulative_histogram
-from histogram import histogram
-from histogram_equalization import histogram_equalization
-from mirror_image import mirror_image
+import numpy as np
 
-from filter.linear_filter import linear_filter
+from simple_operations.check_if_image_grey import check_if_image_grey
+from simple_operations.convert_to_binary import convert_to_binary
+from simple_operations.convert_to_grey import convert_to_grey
+from simple_operations.mirror_image import mirror_image
+from simple_operations.change_contrast_brightness import change_contrast_brightness
+
+from img_statistics.color_proportion import color_proportion
+from img_statistics.histogram import histogram
+from img_statistics.histogram_equalization import histogram_equalization
+from img_statistics.cumulative_histogram import cumulative_histogram
+
 from filter.kuwahara_filter import kuwahara_filter
+from filter.linear_filter_old import linear_filter
 from filter.max_filter import max_filter
-from filter.min_filter import min_filter
 from filter.median_filter import median_filter
+from filter.min_filter import min_filter
 
 from template_matching.champfer_matching import champfer_matching
-from template_matching.distance_transformation import distance_transformation
 from template_matching.correlation_coefficient import correlation_coefficient
+from template_matching.distance_transformation import distance_transformation
 
 
 class ImageEdit(object):
@@ -59,7 +62,17 @@ class ImageEdit(object):
     def kuwahara_filter(self, mask_size):
         return kuwahara_filter(self.path,mask_size)
 
-    def linear_filter(self, mask):
+    def linear_filter(self, param):
+        # depending on different parameters passed to the textField of GUI
+        # you have either a box filter or a gaussian filter
+        if param == 'b':
+            mask = np.array([[1, 1, 1], [1, 1, 1], [1, 1, 1]])
+        elif param == 'g':
+            mask = np.array([[1, 2, 1], [2, 4, 2], [1, 2, 1]])
+        elif param == 'g2':
+            mask = np.array([[1, 4, 6, 4, 1], [4, 16, 24, 16, 4], [6, 24, 36, 24, 6], [1, 4, 6, 4, 1], [4, 16, 24, 16, 4]])
+        else:
+            raise ValueError
         return linear_filter(self.path, mask)
 
     def max_filter(self, rs):

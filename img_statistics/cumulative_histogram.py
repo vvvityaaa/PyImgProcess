@@ -1,7 +1,7 @@
-from PIL import Image
-import numpy as np
 import matplotlib.pyplot as plt
-from histogram import histogram
+import numpy as np
+
+from img_statistics.histogram import histogram
 
 
 def cumulative_histogram(histogr):
