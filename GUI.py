@@ -7,10 +7,11 @@ from simple_operations.check_if_image_grey import check_if_image_grey
 image_set = False
 i = 0
 # create a GUI variable
-img_process_gui = gui("Image Processing", "1280x1080")
+img_process_gui = gui("Image Processing")
 img_process_gui.setGeometry("fullscreen")
 img_process_gui.setBg("#c2c6c3")
 img_process_gui.setFont(17)
+
 
 from ImageEdit import ImageEdit
 import matplotlib.pyplot as plt
@@ -40,6 +41,10 @@ def create_statistics(titel):
     img_process_gui.destroySubWindow(titel)
 
 
+def clean():
+    if os.path.isfile("temporary.png"):
+        os.remove("temporary.png")
+    return True
 
 # handle events
 def press(button):
@@ -48,11 +53,16 @@ def press(button):
     global image_set
     if button == "Save":
         if image_set:
-            img_process_gui.saveBox(showed_image)
+            path = img_process_gui.saveBox(title='Image', fileName='img', dirName=None, fileExt=".png")
+            save_image = Image.open('temporary.png')
+            save_image.save(path)
         else:
             img_process_gui.infoBox("Can't Save Nothing", "You first have to load a picture before you can save one.")
     else:
+
         showed_image = img_process_gui.openBox()
+        save_image = Image.open(showed_image)
+        save_image.save('temporary.png')
         update_image()
 
 
@@ -108,7 +118,11 @@ def choose_simple(option):
             img_process_gui.infoBox("Can't Edit Image", "You first have to convert it into grey image")
             return
         contrast = img_process_gui.numberBox("Contrast", "Set the contrast modifier")
+        if not contrast:
+            contrast = 1
         brightness = img_process_gui.numberBox("Brightness", "Set the brightness modifier")
+        if not brightness:
+            brightness = 0
         temp = Image.fromarray(np.uint8(ed_img.change_contrast_brightness(contrast, brightness)))
         showed_image = 'temporary.png'
         temp.save(showed_image)
@@ -120,10 +134,7 @@ def choose_simple(option):
         temp.save(showed_image)
         update_image()
     elif option == "convert to grey":
-        wr = img_process_gui.numberBox("Weight of red", "Weight of red color")
-        wg = img_process_gui.numberBox("Weight of green", "Weight of green color")
-        wb = img_process_gui.numberBox("Weight of blue", "Weight of blue color")
-        temp = Image.fromarray(np.uint8(ed_img.convert_to_grey(wr, wg, wb)))
+        temp = Image.fromarray(np.uint8(ed_img.convert_to_grey()))
         showed_image = 'temporary.png'
         temp.save(showed_image)
         update_image()
@@ -132,8 +143,12 @@ def choose_simple(option):
         if not grey:
             img_process_gui.infoBox("Can't Edit Image", "You first have to convert it into grey image")
         mirror_param = img_process_gui.textBox("Mirror Parameter", "Set the mirror parameter")
+        if not mirror_param:
+            return
         while not (mirror_param == "v" or mirror_param == "h" or mirror_param == "b"):
             mirror_param = img_process_gui.textBox("Mirror Parameter", "The parameter must be v, h or b")
+            if not mirror_param:
+                return
         temp = Image.fromarray(np.uint8(ed_img.mirror_image(mirror_param)))
         showed_image = 'temporary.png'
         temp.save(showed_image)
@@ -234,6 +249,6 @@ img_process_gui.addMenuList("Template Matching", template_matching_name_list, ch
 
 # add Buttons
 img_process_gui.addButtons(["Save", "Load"], press)
-
+img_process_gui.setStopFunction(clean)
 # start the GUI
 img_process_gui.go()
