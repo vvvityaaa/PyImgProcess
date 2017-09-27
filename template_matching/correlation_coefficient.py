@@ -31,7 +31,7 @@ def correlation_coefficient(path, template_path):
     for i in range(half_template_height, image_height - half_template_height):
 
         for j in range(half_template_width, image_width - half_template_width):
-
+            # region extraction
             if template_height % 2 == 1 and template_width % 2 == 1:
                 cor_region = image_array[i - half_template_height:i + half_template_height + 1,
                              j - half_template_width:j + half_template_width + 1]
@@ -44,6 +44,7 @@ def correlation_coefficient(path, template_path):
             else:
                 cor_region = image_array[i - half_template_height:i + half_template_height,
                              j - half_template_width:j + half_template_width]
+
             covar_region_template = sum(sum(np.cov(cor_region, template_array)))
 
             variance_region = np.var(cor_region)
@@ -56,7 +57,7 @@ def correlation_coefficient(path, template_path):
 
 if __name__ == "__main__":
     algorithm_laufzeit = time.time()
-    cor_img = correlation_coefficient('lena.png', 'template.png')
+    cor_img = correlation_coefficient('../img/lena.png', 'template.png')
     algorithm_laufzeit = time.time() - algorithm_laufzeit
     print(algorithm_laufzeit)
     plt.imshow(cor_img, cmap='gray', interpolation='nearest')

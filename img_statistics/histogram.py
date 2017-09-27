@@ -12,6 +12,7 @@ def histogram(path):
     '''
     i = Image.open(path)
     array = np.asarray(i, dtype=int)
+
     histogram_list = np.zeros(255, dtype=int)
     for row in array:
         for element in row:

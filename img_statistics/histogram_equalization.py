@@ -18,9 +18,11 @@ def histogram_equalization(path):
     i = Image.open(path)
     image_height, image_width = i.shape
     size = image_height*image_width
+    # histogram and cumulative histogram are created
     hist = histogram(path)
     quantity_of_grey_values = len(hist)
     cumul_hist = cumulative_histogram(hist)
+    # iterating over cumulative histogram and appending values to the equalized histogram
     equalized_histogram = []
     for value in cumul_hist:
         equalized_histogram.append(floor(value*quantity_of_grey_values/size))

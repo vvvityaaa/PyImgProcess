@@ -17,15 +17,21 @@ def change_contrast_brightness(path, contrast=1, brightness=0):
 
     i = Image.open(path)
     image_array = np.asarray(i, dtype=int)
+
     for i in range(len(image_array)):
+
         for j in range(len(image_array[i])):
+
             value = contrast*image_array[i, j] + brightness
+
+            # if values go out of boundaries they have to be normalized
             if value < 0:
                 image_array[i, j] = 0
             elif value > 255:
                 image_array[i, j] = 255
             else:
                 image_array[i, j] = contrast*image_array[i, j] + brightness
+
     return image_array
 
 if __name__ == "__main__":

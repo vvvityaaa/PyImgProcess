@@ -20,7 +20,7 @@ def distance_transformation(path):
         return "Parameters seem not to be right"
     except OSError:
         return "This isn't an image"
-    #array = array[:, :, 0]
+    array = array[:, :, 0]
     height_img, width_img = array.shape
     distance = (255*np.ones(height_img*width_img)).reshape(height_img, width_img)
     dL = np.zeros(4)
@@ -29,6 +29,7 @@ def distance_transformation(path):
         for j in range(0, width_img-2):
             if array[i, j] == 255:
                 distance[i, j] = 0
+
     for i in range(1, height_img):
         for j in range(1, width_img-1):
             if distance[i, j] > 0:

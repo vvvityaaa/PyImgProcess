@@ -32,10 +32,11 @@ def linear_filter(path, mask):
 
     for i in range(border_height, size_x-border_height):
         for j in range(border_width, size_y-border_width):
-
+            # region extraction
             region = image_array[i-border_height:i+border_height+1, j-border_width:j+border_width+1]
+            # multiplication of region with mask and summing up of its values
             value = sum(sum(region*mask))
-
+            # normalization of value
             if factor != 0:
                 value = value/factor
             result[i, j] = value

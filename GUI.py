@@ -6,6 +6,7 @@ from simple_operations.check_if_image_grey import check_if_image_grey
 
 image_set = False
 i = 0
+
 # create a GUI variable
 img_process_gui = gui("Image Processing")
 img_process_gui.setGeometry("fullscreen")
@@ -18,9 +19,12 @@ import matplotlib.pyplot as plt
 import os
 
 
-#function to update the image
+
 def update_image():
-    # TODO: comment
+    """
+    The function updates the image that is shown in the gui
+    :return: nothing
+    """
     global ed_img
     global image_set
     if image_set:
@@ -32,23 +36,36 @@ def update_image():
         image_set = True
 
 
-def create_statistics(titel):
-
-    img_process_gui.startSubWindow(titel, modal=True, blocking=True)
-    img_process_gui.addImage(titel, "temporary1.png")
-    img_process_gui.showSubWindow(titel)
+def create_statistics(title):
+    """
+    Creates a new window with the wished statistics
+    :param title: The shown statistics title
+    :return: nothing
+    """
+    img_process_gui.startSubWindow(title, modal=True, blocking=True)
+    img_process_gui.addImage(title, "temporary1.png")
+    img_process_gui.showSubWindow(title)
     os.remove("temporary1.png")
-    img_process_gui.destroySubWindow(titel)
+    img_process_gui.destroySubWindow(title)
 
 
 def clean():
+    """
+    Deletes the temporary data before closing the program
+    :return: true
+    """
     if os.path.isfile("temporary.png"):
         os.remove("temporary.png")
     return True
 
+
 # handle events
 def press(button):
-    # TODO: comment
+    """
+    Handles the press on the buttons Save and Load
+    :param button: name of the pressed button
+    :return: nothing
+    """
     global showed_image
     global image_set
     if button == "Save":
@@ -67,12 +84,15 @@ def press(button):
 
 
 def choose_statistics(option):
+    """
+    Handles statics for current image on the menu options in the statistics menu bar
+    :param option: the chosen option
+    :return: nothing
+    """
     global i
     global showed_image
-    # TODO: comment
 
     if option == "color proportions":
-        # TODO: check if image is coloured
         piechart = ed_img.color_proportion()
         explode = (0, 0, 0)
         labels = ['Red', 'Green', 'Blue']
@@ -110,7 +130,11 @@ def choose_statistics(option):
 
 
 def choose_simple(option):
-    # TODO: comment
+    """
+    Handles simple transformation algorithms on the menu options in the simple menu bar
+    :param option: the chosen option
+    :return: nothing
+    """
     global showed_image
     if option == "change contrast/brightness":
         grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
@@ -158,7 +182,11 @@ def choose_simple(option):
 
 def choose_filter(option):
     global showed_image
-    # TODO: comment
+    """
+    Handles filter algorithms on the menu options in the filter menu bar
+    :param option: the chosen option
+    :return: nothing
+    """
 
     grey = check_if_image_grey(showed_image)  # This value has to be set with the right function
     if not grey:
@@ -210,7 +238,11 @@ def choose_filter(option):
 
 
 def choose_template(option):
-    # TODO: comment
+    """
+    Handles template matching algorithms on the menu options in the template menu bar
+    :param option: the chosen option
+    :return: nothing
+    """
     global showed_image
 
     if option == "champfer matching":

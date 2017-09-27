@@ -13,9 +13,13 @@ def convert_to_binary(path, threshold):
     '''
     i = Image.open(path)
     image_array = np.asarray(i, dtype=int)
+
     for i in range(len(image_array)):
+
         for j in range(len(image_array[i])):
+
             value = image_array[i, j]
+            # checks if value is greater or less than threshold
             if value > threshold:
                 image_array[i, j] = 255
             else:

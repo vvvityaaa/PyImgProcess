@@ -60,7 +60,7 @@ def kuwahara_filter(path, mask_size):
 
 if __name__ == "__main__":
     algorithm_laufzeit = time.time()
-    kuwahara_img = kuwahara_filter('lena.png', 15)
+    kuwahara_img = kuwahara_filter('../img/lena.png', 15)
     algorithm_laufzeit = time.time()-algorithm_laufzeit
     print(algorithm_laufzeit)
     plt.imshow(kuwahara_img, cmap='gray', interpolation='nearest')

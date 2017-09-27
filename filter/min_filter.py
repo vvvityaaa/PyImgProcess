@@ -22,7 +22,7 @@ def min_filter(path, region_size):
     for i in range(half_size, image_height - half_size):
 
         for j in range(half_size, image_width - half_size):
-            # extraction of region of the given size and calculation of its median
+            # extraction of region of the given size and calculation of its min value
             region = (image_array[i - half_size:i + half_size + 1, j - half_size:j + half_size + 1]).ravel()
             resulting_img[i, j] = np.min(region)
 
@@ -30,6 +30,6 @@ def min_filter(path, region_size):
 
 
 if __name__ == "__main__":
-    median_img = min_filter('lena_noise.png', 3)
+    median_img = min_filter('../img/lena_noise.png', 3)
     plt.imshow(median_img, cmap='gray', interpolation='nearest')
     plt.show()

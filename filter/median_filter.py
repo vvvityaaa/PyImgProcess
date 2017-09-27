@@ -35,7 +35,7 @@ def median_filter(path, region_size):
 
 if __name__ == "__main__":
     algorithm_laufzeit = time.time()
-    median_img = median_filter('lena.png', 3)
+    median_img = median_filter('../img/lena.png', 3)
     algorithm_laufzeit = time.time() - algorithm_laufzeit
     print(algorithm_laufzeit)
     plt.imshow(median_img, cmap='gray', interpolation='nearest')
