@@ -1,6 +1,7 @@
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+from open_image import open_image
 
 
 def convert_to_binary(path, threshold):
@@ -11,8 +12,8 @@ def convert_to_binary(path, threshold):
     all the values less than it will get 0 value
     :return:
     '''
-    i = Image.open(path)
-    image_array = np.asarray(i, dtype=int)
+
+    image_array = open_image(path)
 
     for i in range(len(image_array)):
 
@@ -28,6 +29,6 @@ def convert_to_binary(path, threshold):
 
 
 if __name__ == "__main__":
-    binary_img = convert_to_binary('lena.png', 150)
+    binary_img = convert_to_binary('../img/lena.png', 150)
     plt.imshow(binary_img, cmap='gray', interpolation='nearest')
     plt.show()

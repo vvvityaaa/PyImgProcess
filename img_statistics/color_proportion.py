@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
+from open_image import open_image
+
 
 def color_proportion(path):
     """
@@ -9,30 +11,26 @@ def color_proportion(path):
     :param path: path to the picture
     :return: list with values for the piechart
     """
-    try:
-        i = Image.open(path)
-        array = np.asarray(i, dtype=np.float32)
-        value_list = []
-        value_list.append(sum(sum(array[:, :, 0])))
-        value_list.append(sum(sum(array[:, :, 1])))
-        value_list.append(sum(sum(array[:, :, 2])))
-        return value_list
-    except TypeError:
-        return "Parameters seem not to be right"
-    except OSError:
-        return "This isn't an image"
-    except IndexError:
-        return "The image isn't colored"
+    image_array = open_image(path)
+
+    color_proportion_list = []
+    # appends sum of values in red dimension
+    color_proportion_list.append(sum(sum(image_array[:, :, 0])))
+    # appends sum of values in green dimension
+    color_proportion_list.append(sum(sum(image_array[:, :, 1])))
+    # appends sum of values in blue dimension
+    color_proportion_list.append(sum(sum(image_array[:, :, 2])))
+    return color_proportion_list
 
 
 if __name__ == "__main__":
-    piechart = color_proportion('lena.jpg')
+    piechart = color_proportion('../img/lena.jpg')
     if type(piechart) != str:
         explode = (0, 0, 0)
         labels = ['Red', 'Green', 'Blue']
         colors = ['red', 'green', 'blue']
         plt.pie(piechart, explode=explode, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, startangle=140)
-        plt.ylabel("Farbanteil")
+        plt.ylabel("Color proportions")
         plt.show()
     else:
         print(piechart)

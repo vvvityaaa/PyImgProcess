@@ -14,13 +14,17 @@ def cumulative_histogram(histogr):
 
     new_histogram = []
     accumulator = 0
+
     for value in histogr:
+
+        # values are summed up in the accumulator
         accumulator += value
         new_histogram.append(accumulator)
+
     return new_histogram
 
 if __name__ == "__main__":
-    histogr = histogram('lena.png')
+    histogr = histogram('../img/lena.png')
     cumul_histogr = cumulative_histogram(histogr)
     plt.bar(np.arange(255), cumul_histogr)
     plt.ylabel("Grauwertanzahl")

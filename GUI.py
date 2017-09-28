@@ -240,6 +240,11 @@ def choose_filter(option):
 def choose_template(option):
     """
     Handles template matching algorithms on the menu options in the template menu bar
+
+    - champfer matching
+    - correlation coefficient
+    - distance transformation
+
     :param option: the chosen option
     :return: nothing
     """
@@ -249,6 +254,7 @@ def choose_template(option):
         template_path = img_process_gui.openBox("Template path")
         temp = Image.fromarray(np.uint8(ed_img.champfer_matching(template_path)))
         showed_image = 'temporary.png'
+        temp.save(showed_image)
         update_image()
     elif option == "correlation coefficient":
         grey = check_if_image_grey(showed_image)  # This value has to be set with the right function

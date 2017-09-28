@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
+from open_image import open_image
+
 
 def change_contrast_brightness(path, contrast=1, brightness=0):
 
@@ -15,8 +17,7 @@ def change_contrast_brightness(path, contrast=1, brightness=0):
     :return: new image
     '''
 
-    i = Image.open(path)
-    image_array = np.asarray(i, dtype=int)
+    image_array = open_image(path)
 
     for i in range(len(image_array)):
 
@@ -35,6 +36,6 @@ def change_contrast_brightness(path, contrast=1, brightness=0):
     return image_array
 
 if __name__ == "__main__":
-    contrasted_img = change_contrast_brightness('lena.png', -1, 255)
+    contrasted_img = change_contrast_brightness('../img/lena.png', -1, 255)
     plt.imshow(contrasted_img, cmap='gray', interpolation='nearest')
     plt.show()

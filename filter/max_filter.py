@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+from open_image import open_image
 
 def max_filter(path, region_size):
     '''
@@ -13,8 +14,7 @@ def max_filter(path, region_size):
         '''
 
     # initializing image and other helping variables
-    i = Image.open(path)
-    image_array = np.asarray(i, dtype=int)
+    image_array = open_image(path)
     image_height, image_width = image_array.shape
     half_size = math.floor(region_size / 2)
     resulting_img = np.zeros(image_height * image_width).reshape(image_height, image_width)

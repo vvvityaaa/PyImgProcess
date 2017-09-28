@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import math
 import time
 
+from open_image import open_image
+
 
 def correlation_coefficient(path, template_path):
 
@@ -17,10 +19,8 @@ def correlation_coefficient(path, template_path):
     '''
 
     # initializing image and other helping variables
-    i = Image.open(path)
-    image_array = np.asarray(i, dtype=int)
-    t = Image.open(template_path)
-    template_array = np.asarray(t, dtype=int)
+    image_array = open_image(path)
+    template_array = open_image(template_path)
     image_height, image_width = image_array.shape
     template_height, template_width = template_array.shape
     half_template_height = math.floor(template_height/2)
@@ -57,7 +57,7 @@ def correlation_coefficient(path, template_path):
 
 if __name__ == "__main__":
     algorithm_laufzeit = time.time()
-    cor_img = correlation_coefficient('../img/lena.png', 'template.png')
+    cor_img = correlation_coefficient('../img/lena.png', '../img/template.png')
     algorithm_laufzeit = time.time() - algorithm_laufzeit
     print(algorithm_laufzeit)
     plt.imshow(cor_img, cmap='gray', interpolation='nearest')

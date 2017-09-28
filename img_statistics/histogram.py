@@ -2,6 +2,8 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 
+from open_image import open_image
+
 
 def histogram(path):
 
@@ -10,18 +12,21 @@ def histogram(path):
     :param path:
     :return:
     '''
-    i = Image.open(path)
-    array = np.asarray(i, dtype=int)
+    image_array = open_image(path)
 
     histogram_list = np.zeros(255, dtype=int)
-    for row in array:
+
+    for row in image_array:
+
         for element in row:
+
             histogram_list[element] += 1
+
     return histogram_list
 
 
 if __name__ == "__main__":
-    histogr = histogram('lena.png')
+    histogr = histogram('../img/lena.png')
     plt.bar(np.arange(255),histogr)
     plt.ylabel("Grauwertanzahl")
     plt.show()

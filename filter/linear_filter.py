@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 import math
 import time
 
+from open_image import open_image
+
 
 def linear_filter(path, mask):
 
@@ -14,13 +16,7 @@ def linear_filter(path, mask):
     :return: filtered image
     '''
 
-    try:
-        image = Image.open(path)
-        image_array = np.asarray(image, dtype=np.float32)
-    except TypeError:
-        return "Parameters seem not to be right"
-    except OSError:
-        return "This isn't an image"
+    image_array = open_image(path)
     size_x, size_y = image_array.shape
     height_m, width_m = mask.shape
     border_height = math.floor(height_m/2)
